@@ -4,16 +4,33 @@
 
 1. On the UCI cluster, the resource request "-pe openmp 64" refers to the number of processors requested.  Does that
    request mean that your commands will use multiple processors?
+   It will use one or some or all processors depends on the job runs. "-pe openmp 64" will reserve 64 processors but if the job only uses several processors, the rest of the processors will not be in use.
+   
 2. In general, how do you know how many processors, how much RAM, how many files would be required/needed/written by the
    jobs you are running on the cluster?
+   
+   Use this command will show details about a specific job id
+   qstat -j (job ID) 
+   
 3. In order to be a "good citizen", you need to have some idea of much RAM your job requires.  In particular, you need
    to know the "peak" (i.e., maximum) RAM required at any point during execution.  Show an example of the shell command
    that you would use on a Linux machine to measure run time and peak ram usage of an arbitrary command, where the time/peak RAM values are written to a file.
+   Use this command to measure job running time and memory:
+   /usr/bin/time/ samtools sort input_file > output_file
+   
 4. What are the units of your answer for number 3?
+seconds and kilobytes
+
 5. What are the bash commands for the following operations:
 
-    * Checking that a file exists
-    * Checking that a file exists and is not empty
+    * Checking that a file exists:
+   if [ -f examplefile]; then
+   echo "The file exists."
+   else
+   echo "The file does not exist."
+   fi
+    * Checking that a file exists and is not empty:
+    
 
 6. How would you use the commands from your answer to 5 to write a work flow for HPC that only runs a job if the
    expected output file is **not** present.
