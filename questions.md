@@ -17,7 +17,7 @@
    to know the "peak" (i.e., maximum) RAM required at any point during execution.  Show an example of the shell command
    that you would use on a Linux machine to measure run time and peak ram usage of an arbitrary command, where the time/peak RAM values are written to a file.
    #### Use this command to measure job running time and memory:
-   ##### <pre><code>  /usr/bin/time/ samtools sort input_file > output_file </pre></code> 
+   #### <pre><code>  /usr/bin/time/ samtools sort input_file > output_file </pre></code> 
    
 4. What are the units of your answer for number 3?
    #### seconds and kilobytes
