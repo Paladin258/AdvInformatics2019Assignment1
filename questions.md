@@ -4,43 +4,58 @@
 
 1. On the UCI cluster, the resource request "-pe openmp 64" refers to the number of processors requested.  Does that
    request mean that your commands will use multiple processors?
-   It will use one or some or all processors depends on the job runs. "-pe openmp 64" will reserve 64 processors but if the job only uses several processors, the rest of the processors will not be in use.
+   
+   #### It will use one or some or all processors depends on the job runs. "-pe openmp 64" will reserve 64 processors but if the job only uses several processors, the rest of the processors will not be in use.
    
 2. In general, how do you know how many processors, how much RAM, how many files would be required/needed/written by the
    jobs you are running on the cluster?
    
-   Use this command will show details about a specific job id
-   qstat -j (job ID) 
+   #### Use this command will show details about a specific job id
+   #### <pre><code> qstat -j (job ID) </pre></code> 
    
 3. In order to be a "good citizen", you need to have some idea of much RAM your job requires.  In particular, you need
    to know the "peak" (i.e., maximum) RAM required at any point during execution.  Show an example of the shell command
    that you would use on a Linux machine to measure run time and peak ram usage of an arbitrary command, where the time/peak RAM values are written to a file.
-   Use this command to measure job running time and memory:
-   /usr/bin/time/ samtools sort input_file > output_file
+   #### Use this command to measure job running time and memory:
+   ##### <pre><code>  /usr/bin/time/ samtools sort input_file > output_file </pre></code> 
    
 4. What are the units of your answer for number 3?
-seconds and kilobytes
+   #### seconds and kilobytes
 
 5. What are the bash commands for the following operations:
 
     * Checking that a file exists:
-   if [ -f examplefile]; then
-   echo "The file exists."
-   else
-   echo "The file does not exist."
-   fi
+   #### if [ -f examplefile ]; then echo "The file exists."
+   #### else
+   #### echo "The file does not exist."
+   #### fi  
+   
     * Checking that a file exists and is not empty:
+    
+   #### if [ -s examplefile ]; then echo "The file has data."
+   #### else
+   #### echo "The file is empty."
+   #### fi  
     
 
 6. How would you use the commands from your answer to 5 to write a work flow for HPC that only runs a job if the
    expected output file is **not** present.
+   #### if [ -s examplefile ]; then echo "The output file is present, job is not needed."
+   #### else
+   #### qsub bamtobw.sh
+   #### fi  
 
 ## Trickier questions
 
-7. Would your answer to number 3 work on Apple's OS X operating system?  If no, do you have any idea why not? 
+7. Would your answer to number 3 work on Apple's OS X operating system?  If no, do you have any idea why not?
+   #### No because Apple's OS X does not have all the features of the Bash/Unix/Linux base operating system
 
 8. Most of the HPC nodes have 512Gb (gigabytes) of RAM. Let's say you have a job that will require **no more** than 24Gb
    of RAM.  How would you request resources so that you can run more than one job on a node **and** not cause nodes to
    crash?  Show an example of a skeleton HPC script as part of your answer.  **Knowing how to do this is super important
    and will save you loads of frustration and prevent you from taking out your colleagues' jobs on the cluster,
    preventing you from getting nasty emails from Harry!!!!!!!!!!!**
+   
+   #### Run this command when qsub a script.sh for jobs:
+   #### #$ -pe one-node-mpi 64
+   #### It will run the job in one node using 64 cores
